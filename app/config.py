@@ -13,3 +13,5 @@ class Config:
             f.flush()
 
         SECRET_KEY = key
+
+    MONGODB_DATABASE_URI = os.environ.get("MONGODB_DATABASE_URI")

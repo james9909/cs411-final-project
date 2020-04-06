@@ -2,6 +2,7 @@ from flask import Flask
 from flask_migrate import Migrate, upgrade
 from sqlalchemy.engine.url import make_url
 from sqlalchemy_utils import database_exists, create_database
+from pymongo import MongoClient
 
 from app.config import Config
 from app.models import db
@@ -25,4 +26,6 @@ def create_app(config=Config()):
                    upgrade()
 
         app.db = db
+        app.mongo_client = MongoClient(app.config["MONGODB_DATABASE_URI"])
+        app.mongo_client.server_info()
     return app

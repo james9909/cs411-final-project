@@ -33,6 +33,14 @@ services:
     ports:
       - 8000:80
 
+  mongodb:
+    restart: always
+    image: mongo:4.2
+    networks:
+      - backend
+    env_file:
+      - env/mongo.env
+
 networks:
   backend:
     driver: bridge
