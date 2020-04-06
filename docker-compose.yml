@@ -36,10 +36,12 @@ services:
   mongodb:
     restart: always
     image: mongo:4.2
-    networks:
-      - backend
     env_file:
       - env/mongo.env
+    volumes:
+      - mongodb:/data/db
+    networks:
+      - backend
 
 networks:
   backend:
@@ -47,4 +49,6 @@ networks:
 
 volumes:
   mysql:
+    driver: local
+  mongodb:
     driver: local
