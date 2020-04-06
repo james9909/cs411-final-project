@@ -1,5 +1,9 @@
-Django==3.0.5
 requests==2.23.0
 beautifulsoup4==4.8.2
-mysqlclient==1.4.6
-uwsgi==2.0.18
+flask==1.1.2
+flask-sqlalchemy==2.4.1
+flask-script==2.0.6
+pymysql==0.9.3
+Flask-Migrate==2.5.3
+sqlalchemy-utils==0.36.3
+cryptography==2.9

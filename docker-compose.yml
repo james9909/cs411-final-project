@@ -20,8 +20,6 @@ services:
       - mysql:/var/lib/mysql
     networks:
       - backend
-    expose:
-      - 3306
 
   nginx:
     restart: always
