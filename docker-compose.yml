@@ -6,6 +6,9 @@ services:
     build: .
     env_file:
       - env/web.env
+    volumes:
+      - ./app:/cs411/app
+      - ./migrations:/cs411/migrations
     networks:
       - backend
     depends_on:

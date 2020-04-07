@@ -16,6 +16,6 @@ RUN pip3 install -r requirements.txt
 
 COPY manage.py /cs411
 COPY docker-entrypoint.sh /cs411
-COPY migrations /cs411/migrations
-COPY app /cs411/app
+# COPY migrations /cs411/migrations
+# COPY app /cs411/app
 ENTRYPOINT ["sh", "./docker-entrypoint.sh"]
