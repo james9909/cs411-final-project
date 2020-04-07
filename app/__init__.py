@@ -1,9 +1,10 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_migrate import Migrate, upgrade
 from sqlalchemy.engine.url import make_url
 from sqlalchemy_utils import database_exists, create_database
 from pymongo import MongoClient
 
+from app import views
 from app.config import Config
 from app.models import db
 
@@ -28,4 +29,6 @@ def create_app(config=Config()):
         app.db = db
         app.mongo_client = MongoClient(app.config["MONGODB_DATABASE_URI"])
         app.mongo_client.server_info()
+
+        app.register_blueprint(views.blueprint, url_prefix="/")
     return app
