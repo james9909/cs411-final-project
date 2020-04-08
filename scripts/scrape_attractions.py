@@ -15,6 +15,7 @@ for attraction in soup.findAll("div", {"class": "Ld2paf"}):
     try:
         info = attraction.find("div", {"class": "GwjAi"})
         name = info.find("div", {"class": ["skFvHc", "YmWhbc"]}).text
+        print(name)
         rating = float(info.find("span", {"class": "KFi5wf"}).text)
         num_reviews = int(info.find("span", {"class": "jdzyld"}).text[2:-1].replace(",", ""))
         description = info.find("div", {"class": "nFoFM"}).text
@@ -23,6 +24,7 @@ for attraction in soup.findAll("div", {"class": "Ld2paf"}):
             GOOGLE_API_KEY
         )
         r = requests.get(url).json()
+        address = r["results"][0]["formatted_address"]
         loc = r["results"][0]["geometry"]["location"]
         lat = loc["lat"]
         lng = loc["lng"]
@@ -33,10 +35,11 @@ for attraction in soup.findAll("div", {"class": "Ld2paf"}):
             "num_reviews": num_reviews,
             "description": description,
             "latitude": lat,
-            "longitude": lng
+            "longitude": lng,
+            "address": address
         })
-    except:
-        pass
+    except Exception as e:
+        print("Exception: {}".format(e))
 
 with open("data/attractions.json", "w") as f:
     f.write(json.dumps(data))
