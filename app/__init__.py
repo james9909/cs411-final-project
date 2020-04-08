@@ -4,7 +4,7 @@ from sqlalchemy.engine.url import make_url
 from sqlalchemy_utils import database_exists, create_database
 from pymongo import MongoClient
 
-from app import views
+from app import api, views
 from app.config import Config
 from app.models import db
 
@@ -31,4 +31,5 @@ def create_app(config=Config()):
         app.mongo_client.server_info()
 
         app.register_blueprint(views.blueprint, url_prefix="/")
+        app.register_blueprint(api.user.blueprint, url_prefix="/api/user")
     return app
