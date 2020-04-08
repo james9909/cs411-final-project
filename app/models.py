@@ -11,13 +11,14 @@ class User(db.Model):
     password = db.Column(db.String(64), nullable=False)
     is_admin = db.Column(db.Boolean(), default=False, nullable=False)
 
-# class Attraction(db.Model):
-#     __tablename__ = "attractions"
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(128), nullable=False)
-#     rating = db.Column(db.Float, nullable=False)
-#     latitude = db.Column(db.Float, nullable=False)
-#     longitude = db.Column(db.Float, nullable=False)
+class Attraction(db.Model):
+    __tablename__ = "attractions"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128), nullable=False)
+    address = db.Column(db.String(128), nullable=False)
+    rating = db.Column(db.Float, nullable=False)
+    latitude = db.Column(db.Float, nullable=False)
+    longitude = db.Column(db.Float, nullable=False)
 
 # class ViewType(enum.Enum):
 #     RESTAURANT = "restaurant"
