@@ -43,3 +43,28 @@ def add_attraction():
 		})
     db.session.commit()
     return {"message": "Success!"}
+
+
+@blueprint.route("/<id>", methods=["POST"])
+@api_view
+def update_attractions(id):
+
+    name = request.form["name"]
+    address = request.form["address"]
+    rating = request.form["rating"]
+    latitude = request.form["latitude"]
+    longitude = request.form["longitude"]
+
+    result = db.session.execute("SELECT 1 FROM attractions WHERE id = :id", {"id": id}).fetchone()
+    if result is not None:
+        db.session.execute("UPDATE Attractions SET name = :name, address = :address, rating = :rating, latitude = :latitude, longitude = :longitude WHERE id = :id"),
+        {
+            "id": id,
+            "name": name,
+            "address": address,
+            "rating": rating,
+            "latitude": latitude,
+            "longitude": longitude
+        })
+        db.session.commit()
+    return {"message": "Success!"}
