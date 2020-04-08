@@ -78,4 +78,5 @@ def delete_attractions(id):
 	{
 		"id": id
 	})
+	db.session.commit()
 	return {"message": "Success!"}
