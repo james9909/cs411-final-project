@@ -57,7 +57,7 @@ def update_attractions(id):
 
     result = db.session.execute("SELECT 1 FROM attractions WHERE id = :id", {"id": id}).fetchone()
     if result is not None:
-        db.session.execute("UPDATE Attractions SET name = :name, address = :address, rating = :rating, latitude = :latitude, longitude = :longitude WHERE id = :id"),
+        db.session.execute("UPDATE attractions SET name = :name, address = :address, rating = :rating, latitude = :latitude, longitude = :longitude WHERE id = :id",
         {
             "id": id,
             "name": name,
@@ -68,3 +68,14 @@ def update_attractions(id):
         })
         db.session.commit()
     return {"message": "Success!"}
+
+
+@blueprint.route("/<id>", methods=["DELETE"])
+@api_view
+def delete_attractions(id):
+
+	db.session.execute("DELETE FROM attractions WHERE id = :id",
+	{
+		"id": id
+	})
+	return {"message": "Success!"}
