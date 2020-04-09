@@ -24,7 +24,7 @@ $("form[action='update']").submit(function(e) {
             $(`#${attraction_id}-submit`).removeAttr("disabled", "disabled");
         }
     );
-})
+});
 
 $("#add-form").submit(function(e) {
     e.preventDefault();
@@ -50,4 +50,14 @@ $("#add-form").submit(function(e) {
             $(`#add-submit`).removeAttr("disabled", "disabled");
         }
     );
-})
+});
+
+function deleteAttraction(id) {
+    $(`#${id}-delete`).attr("disabled", "disabled");
+    apiCall("DELETE", `/api/attractions/${id}`, {}, function(response) {
+        $(`#${id}-delete`).removeAttr("disabled", "disabled");
+        window.location = "/admin/attractions";
+    }, function(response) {
+        $(`#${id}-delete`).removeAttr("disabled", "disabled");
+    });
+}
