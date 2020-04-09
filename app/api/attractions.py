@@ -30,7 +30,7 @@ def get_attractions():
 
 @blueprint.route("/", methods=["POST"])
 @api_view
-@admin_required
+#@admin_required
 def add_attraction():
     name = request.form["name"]
     address = request.form["address"]
