@@ -72,15 +72,15 @@
                     <div class="form-row">
                         <div class="form-group col">
                             <label for="{{ attraction["id"] }}-rating" class="sr-only">Rating</label>
-                            <input type="number" class="form-control" id="{{ attraction["id"] }}-rating" value="{{ attraction["rating"] }}">
+                            <input type="number" class="form-control" id="{{ attraction["id"] }}-rating" step="any" value="{{ attraction["rating"] }}">
                         </div>
                         <div class="form-group col">
                             <label for="{{ attraction["id"] }}-lat" class="sr-only">Latitude</label>
-                            <input type="number" class="form-control" id="{{ attraction["id"] }}-lat" value="{{ attraction["latitude"] }}">
+                            <input type="number" class="form-control" id="{{ attraction["id"] }}-lat" step="any" value="{{ attraction["latitude"] }}">
                         </div>
                         <div class="form-group col">
                             <label for="{{ attraction["id"] }}-long" class="sr-only">Longitude</label>
-                            <input type="number" class="form-control" id="{{ attraction["id"] }}-long" value="{{ attraction["longitude"] }}">
+                            <input type="number" class="form-control" id="{{ attraction["id"] }}-long" step="any "value="{{ attraction["longitude"] }}">
                         </div>
                     </div>
                     <button id="{{ attractions["id"] }}-submit" type="submit" class="btn btn-primary mb-2">Update</button>

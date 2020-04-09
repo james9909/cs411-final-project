@@ -60,7 +60,7 @@ def update_attractions(id):
     longitude = request.form["longitude"]
 
     result = db.session.execute("SELECT 1 FROM attractions WHERE id = :id", {"id": id}).fetchone()
-    if result is None:
+    if result is not None:
         db.session.execute("UPDATE attractions SET name = :name, address = :address, rating = :rating, latitude = :latitude, longitude = :longitude WHERE id = :id",
         {
             "id": id,
