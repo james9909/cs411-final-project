@@ -25,3 +25,29 @@ $("form[action='update']").submit(function(e) {
         }
     );
 })
+
+$("#add-form").submit(function(e) {
+    e.preventDefault();
+
+    let name = $(`#add-name`).val();
+    let address = $(`#add-addr`).val();
+    let rating = parseFloat($(`#add-rating`).val());
+    let latitude = parseFloat($(`#add-lat`).val());
+    let longitude = parseFloat($(`#add-long`).val());
+    $(`#add-submit`).attr("disabled", "disabled");
+    apiCall("POST", `/api/attractions`, {
+        name: name,
+        address: address,
+        rating: rating,
+        latitude: latitude,
+        longitude: longitude
+    },
+        function(response) {
+            $(`#add-submit`).removeAttr("disabled", "disabled");
+            window.location = "/admin/attractions";
+        },
+        function(response) {
+            $(`#add-submit`).removeAttr("disabled", "disabled");
+        }
+    );
+})
