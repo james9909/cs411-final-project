@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session
 from flask_migrate import Migrate, upgrade
 from sqlalchemy.engine.url import make_url
 from sqlalchemy_utils import database_exists, create_database
@@ -29,6 +29,10 @@ def create_app(config=Config()):
         app.db = db
         app.mongo_client = MongoClient(app.config["MONGODB_DATABASE_URI"])
         app.mongo_client.server_info()
+
+        @app.context_processor
+        def inject_user():
+            return dict(user=session)
 
         app.register_blueprint(views.blueprint, url_prefix="/")
         app.register_blueprint(api.user.blueprint, url_prefix="/api/user")
