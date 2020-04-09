@@ -2,6 +2,13 @@
 
 {% block content %}
 <br/>
+<form class="form" action="/admin/attractions" method="GET">
+  <div class="form-inline">
+    <input type="text" class="form-control" id="search_name" name="search_name" placeholder="Search by name">
+    <input type="submit" class="btn btn-primary" value="Search">
+  </div>
+</form>
+<br/>
   <div id="accordion">
     <div class="card">
       <div class="card-header" id="add-id">

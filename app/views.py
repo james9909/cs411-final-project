@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, redirect, url_for
+from flask import Blueprint, render_template, session, redirect, url_for, request
 
 from app.models import db
 
@@ -23,7 +23,13 @@ def logout():
 
 @blueprint.route("/admin/attractions")
 def admin_attractions():
-    result = db.session.execute("SELECT id, name, address, rating, latitude, longitude FROM attractions").fetchall()
+    search_name = request.args.get("search_name", "", type=str)
+    if search_name != "":
+        result = db.session.execute("SELECT id, name, address, rating, latitude, longitude FROM attractions WHERE name LIKE :name", {
+            "name": "%" + search_name + "%"
+        }).fetchall()
+    else:
+        result = db.session.execute("SELECT id, name, address, rating, latitude, longitude FROM attractions").fetchall()
     data = []
     for row in result:
         data.append({
