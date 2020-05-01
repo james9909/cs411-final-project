@@ -4,10 +4,10 @@
 <br>
 <div class="card">
     <div class="card-header">
-        Login
+        Register
     </div>
     <div class="card-body">
-        <form id="login-form">
+        <form id="register-form">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" id="username" placeholder="Enter username" required>
@@ -16,12 +16,12 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" placeholder="Password" required>
             </div>
-            <button id="login-submit" type="submit" class="btn btn-primary">Submit</button>
+            <button id="register-submit" type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/register.js') }}"></script>
 {% endblock %}
