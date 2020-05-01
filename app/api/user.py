@@ -12,9 +12,12 @@ blueprint = Blueprint("api_user", __name__)
 def register():
     username = request.form["username"]
     password = request.form["password"]
+    re_password = request.form["re_password"]
 
     if len(password) < 4:
         return {"message": "Password should be at least 4 characters long"}
+    if password != re_password:
+        return {"message": "Passwords don't match. Try again."}
     result = db.session.execute("SELECT 1 FROM users WHERE username = :username", {"username": username}).fetchone()
     if result is not None:
         return {"message": "That username is taken"}
