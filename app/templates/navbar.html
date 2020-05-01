@@ -12,7 +12,8 @@
         <ul class="navbar-nav navbar-right">
             {% if user %}
                 {% if user["is_admin"] %}
-            <li class="nav-item"><a class="nav-link" href="/admin/attractions">Admin</a></li>
+            <li class="nav-item"><a class="nav-link" href="/admin/attractions">Edit Attractions</a></li>
+            <li class="nav-item"><a class="nav-link" href="/admin/restaurants">Edit Restaurants</a></li>
                 {% endif %}
             <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
             {% else %}

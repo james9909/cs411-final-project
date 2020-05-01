@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br/>
+<form class="form" action="/admin/restaurants" method="GET">
+  <div class="form-inline">
+    <input type="text" class="form-control" id="search_name" name="search_name" placeholder="Search by name">
+    <input type="submit" class="btn btn-primary" value="Search">
+  </div>
+</form>
+<br/>
+  <div id="accordion">
+    <div class="card">
+      <div class="card-header" id="add-id">
+        <h5 class="mb-0">
+          <div id="add-header" data-toggle="collapse" aria-expanded="true">
+            Create New Restaurant
+          </div>
+        </h5>
+      </div>
+
+      <div id="add-collapse" class="collapse show" aria-labelledby="add-id" data-parent="#accordion">
+        <div class="card-body">
+          <form class="form" id="add-form" action="create">
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="add-name" class="sr-only">Name</label>
+                <input type="text" class="form-control" id="add-name" placeholder="Name of Restaurant">
+              </div>
+              <div class="form-group col">
+                <label for="add-addr" class="sr-only">Address</label>
+                <input type="text" class="form-control" id="add-addr" placeholder="Address">
+              </div>
+              <div class="form-group col">
+                  <label for="add-url" class="sr-only">Yelp URL</label>
+                  <input type="text" class="form-control" id="add-url" placeholder="Yelp URL">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="add-rating" class="sr-only">Rating</label>
+                <input type="number" class="form-control" id="add-rating" placeholder="Rating">
+              </div>
+              <div class="form-group col">
+                <label for="add-lat" class="sr-only">Latitude</label>
+                <input type="number" class="form-control" id="add-lat" placeholder="Latitude">
+              </div>
+              <div class="form-group col">
+                <label for="add-long" class="sr-only">Longitude</label>
+                <input type="number" class="form-control" id="add-long" placeholder="Longitude">
+              </div>
+              <div class="form-group col">
+                <label for="add-categories" class="sr-only">Categories</label>
+                <input type="text" class="form-control" id="add-categories" placeholder="Categories">
+              </div>
+            </div>
+            <button id="add-submit" type="submit" class="btn btn-primary mb-2">Create</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <br/>
+
+    {% for restaurant in restaurants %}
+    <div class="card">
+        <div class="card-header" id="{{ restaurant["_id"] }}-id">
+            <h5 class="mb-0">
+                <div id="{{ restaurant["_id"] }}-header" data-toggle="collapse" data-target="#{{ restaurant["_id"] }}-collapse" aria-expanded="true" aria-controls="{{ restaurant["_id"] }}-collapse">
+                    {{ restaurant["name"] }}
+                </div>
+            </h5>
+        </div>
+
+        <div id="{{ restaurant["_id"] }}-collapse" class="collapse show" aria-labelledby="{{ restaurant["_id"] }}-id" data-parent="#accordion">
+            <div class="card-body">
+                <form class="form" id="{{ restaurant["_id"] }}" action="update">
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="{{ restaurant["_id"] }}-name" class="sr-only">Name</label>
+                            <input type="text" class="form-control" id="{{ restaurant["_id"] }}-name" value="{{ restaurant["name"] }}">
+                        </div>
+                        <div class="form-group col">
+                            <label for="{{ restaurant["_id"] }}-addr" class="sr-only">Address</label>
+                            <input type="text" class="form-control" id="{{ restaurant["_id"] }}-addr" value="{{ restaurant["address"] }}">
+                        </div>
+                        <div class="form-group col">
+                            <label for="{{ restaurant["_id"] }}-url" class="sr-only">Yelp URL</label>
+                            <input type="text" class="form-control" id="{{ restaurant["_id"] }}-url" value="{{ restaurant["yelp_url"] }}">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="{{ restaurant["_id"] }}-rating" class="sr-only">Rating</label>
+                            <input type="number" class="form-control" id="{{ restaurant["_id"] }}-rating" step="any" value="{{ restaurant["rating"] }}">
+                        </div>
+                        <div class="form-group col">
+                            <label for="{{ restaurant["_id"] }}-lat" class="sr-only">Latitude</label>
+                            <input type="number" class="form-control" id="{{ restaurant["_id"] }}-lat" step="any" value="{{ restaurant["latitude"] }}">
+                        </div>
+                        <div class="form-group col">
+                            <label for="{{ restaurant["_id"] }}-long" class="sr-only">Longitude</label>
+                            <input type="number" class="form-control" id="{{ restaurant["_id"] }}-long" step="any "value="{{ restaurant["longitude"] }}">
+                        </div>
+                        <div class="form-group col">
+                            <label for="{{ restaurant["_id"] }}-categories" class="sr-only">Categories</label>
+                            <input type="text" class="form-control" id="{{ restaurant["_id"] }}-categories" value="{{ ",".join(restaurant["categories"]) }}">
+                        </div>
+                    </div>
+                    <button id="{{ restaurant["_id"] }}-submit" type="submit" class="btn btn-primary mb-2">Update</button>
+                    <button id="{{ restaurant["_id"] }}-delete" type="button" class="btn btn-danger mb-2" onclick="deleteRestaurant('{{ restaurant["_id"] }}')">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/admin/restaurants.js') }}"></script>
+{% endblock %}

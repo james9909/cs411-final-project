@@ -37,4 +37,5 @@ def create_app(config=Config()):
         app.register_blueprint(views.blueprint, url_prefix="/")
         app.register_blueprint(api.user.blueprint, url_prefix="/api/user")
         app.register_blueprint(api.attractions.blueprint, url_prefix="/api/attractions")
+        app.register_blueprint(api.restaurants.blueprint, url_prefix="/api/restaurants")
     return app

@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, session, redirect, url_for, request
+from flask import Blueprint, render_template, session, redirect, url_for, request, current_app as app
 
+from app.decorators import admin_required
 from app.models import db
 
 blueprint = Blueprint("views", __name__)
@@ -22,6 +23,7 @@ def logout():
     return render_template("index.html")
 
 @blueprint.route("/admin/attractions")
+@admin_required
 def admin_attractions():
     search_name = request.args.get("search_name", "", type=str)
     if search_name != "":
@@ -41,3 +43,18 @@ def admin_attractions():
             "longitude": row[5]
         })
     return render_template("admin/attractions.html", attractions=data)
+
+@blueprint.route("/admin/restaurants")
+@admin_required
+def admin_restaurants():
+    search_name = request.args.get("search_name", "", type=str)
+    query = {}
+    if search_name != "":
+        query = {
+            "name": {
+                "$regex": ".*{}.*".format(search_name),
+                "$options": "i"
+            }
+        }
+    data = app.mongo_client["cs411"].restaurants.find(query)
+    return render_template("admin/restaurants.html", restaurants=data)
