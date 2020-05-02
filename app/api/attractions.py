@@ -24,6 +24,7 @@ def get_attractions():
         }
         data.append(currDict)
     return {
+        "status": 200,
         "data": data
     }
 
@@ -46,7 +47,7 @@ def add_attraction():
         "longitude": longitude
     })
     db.session.commit()
-    return {"message": "Success!"}
+    return {"status": 200, "message": "Attraction added"}
 
 
 @blueprint.route("/<id>", methods=["POST"])
@@ -60,18 +61,20 @@ def update_attractions(id):
     longitude = request.form["longitude"]
 
     result = db.session.execute("SELECT 1 FROM attractions WHERE id = :id", {"id": id}).fetchone()
-    if result is not None:
-        db.session.execute("UPDATE attractions SET name = :name, address = :address, rating = :rating, latitude = :latitude, longitude = :longitude WHERE id = :id",
-        {
-            "id": id,
-            "name": name,
-            "address": address,
-            "rating": rating,
-            "latitude": latitude,
-            "longitude": longitude
-        })
-        db.session.commit()
-    return {"message": "Success!"}
+    if result is None:
+        return {"status": 200, "message": "Attraction not found"}
+
+    db.session.execute("UPDATE attractions SET name = :name, address = :address, rating = :rating, latitude = :latitude, longitude = :longitude WHERE id = :id",
+    {
+        "id": id,
+        "name": name,
+        "address": address,
+        "rating": rating,
+        "latitude": latitude,
+        "longitude": longitude
+    })
+    db.session.commit()
+    return {"status": 200, "message": "Attraction updated"}
 
 
 @blueprint.route("/<id>", methods=["DELETE"])
@@ -80,4 +83,4 @@ def update_attractions(id):
 def delete_attractions(id):
     db.session.execute("DELETE FROM attractions WHERE id = :id", {"id": id})
     db.session.commit()
-    return {"message": "Success!"}
+    return {"status": 200, "message": "Attraction deleted"}

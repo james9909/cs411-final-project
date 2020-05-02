@@ -13,7 +13,8 @@ def api_view(f):
         except Exception:
             result = {"message": "Something went wrong!"}
             traceback.print_exc()
-        return make_response(jsonify(result))
+        status = result.pop("status", 200)
+        return make_response(jsonify(result), status)
     return wrapper
 
 def login_required(f):

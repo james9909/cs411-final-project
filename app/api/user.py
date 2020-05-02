@@ -1,6 +1,6 @@
 import hashlib
 
-from flask import Blueprint, request, current_app as app, session
+from flask import Blueprint, request, current_app as app, session, flash
 
 from app.decorators import api_view
 from app.models import db
@@ -31,10 +31,9 @@ def register():
                 "password": hashlib.sha256(password.encode("utf-8")).hexdigest()
             })
         db.session.commit()
-        return redirect(url_for("login"))
+        return {}
 
-    flash(error)
-    return render_template("register.html")
+    return {"status": 403, "message": error}
 
 @blueprint.route("/login", methods=["POST"])
 @api_view
@@ -48,10 +47,8 @@ def login():
         "password": hashlib.sha256(password.encode("utf-8")).hexdigest()
     }).fetchone()
     if result is None:
-        error = "Invalid credentials"
-        flash(error)
-        return render_template("login.html")
+        return {"status": 403, "message": "Invalid credentials"}
 
     session["uid"] = result[0]
     session["is_admin"] = result[2] == 1
-    return redirect(url_for("index"))
+    return {}
