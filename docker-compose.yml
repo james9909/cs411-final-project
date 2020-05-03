@@ -9,6 +9,8 @@ services:
     volumes:
       - ./app:/cs411/app
       - ./migrations:/cs411/migrations
+      - ./scripts:/cs411/scripts
+      - ./data:/cs411/data
     networks:
       - backend
     depends_on:
