@@ -51,4 +51,5 @@ def login():
 
     session["uid"] = result[0]
     session["is_admin"] = result[2] == 1
+    session["username"] = username
     return {}

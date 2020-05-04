@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 
-string uid = session["uid"]
-
 {% block content %}
   <body>
     <p style="text-align:center; font-family:Avenir; font-size:40px">WELCOME</p>
@@ -9,8 +7,10 @@ string uid = session["uid"]
       <p style="text-align:center; font-family:Avenir; font-size:20px">Please log in with your accounts.</p>
     {% else %}
       {% if user["is_admin"] %}
+      <p style="text-align:center; font-family:Avenir; font-size:20px"> Hello! {{session.username}}!</p>
         <p style="text-align:center; font-family:Avenir; font-size:20px">This is an admin account. </p>
       {% else %}
+        <p style="text-align:center; font-family:Avenir; font-size:20px"> Hello! {{session.username}}!</p>
         <p style="text-align:center; font-family:Avenir; font-size:20px">This is a normal account. </p>
       {% endif %}
     {% endif %}
