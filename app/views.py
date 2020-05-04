@@ -1,11 +1,12 @@
 from flask import Blueprint, render_template, session, redirect, url_for, request, current_app as app
 
-from app.decorators import admin_required
+from app.decorators import admin_required, login_required
 from app.models import db
 
 blueprint = Blueprint("views", __name__)
 
 @blueprint.route("/", methods=["GET"])
+@login_required
 def index():
     return render_template("index.html")
 
