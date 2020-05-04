@@ -10,15 +10,15 @@ $("form[action='update']").submit(function(e) {
     let longitude = parseFloat($(`#${attraction_id}-long`).val());
     $(`#${attraction_id}-submit`).attr("disabled", "disabled");
     apiCall("POST", `/api/attractions/${attraction_id}`, {
-        name: name,
-        address: address,
-        rating: rating,
-        latitude: latitude,
-        longitude: longitude
+        name,
+        address,
+        rating,
+        latitude,
+        longitude
     },
         function(response) {
             $(`#${attraction_id}-submit`).removeAttr("disabled", "disabled");
-            window.location = "/admin/attractions";
+            location.reload();
         },
         function(response) {
             $(`#${attraction_id}-submit`).removeAttr("disabled", "disabled");
@@ -36,15 +36,15 @@ $("#add-form").submit(function(e) {
     let longitude = parseFloat($(`#add-long`).val());
     $(`#add-submit`).attr("disabled", "disabled");
     apiCall("POST", `/api/attractions`, {
-        name: name,
-        address: address,
-        rating: rating,
-        latitude: latitude,
-        longitude: longitude
+        name,
+        address,
+        rating,
+        latitude,
+        longitude
     },
         function(response) {
             $(`#add-submit`).removeAttr("disabled", "disabled");
-            window.location = "/admin/attractions";
+            location.reload();
         },
         function(response) {
             $(`#add-submit`).removeAttr("disabled", "disabled");
@@ -56,7 +56,7 @@ function deleteAttraction(id) {
     $(`#${id}-delete`).attr("disabled", "disabled");
     apiCall("DELETE", `/api/attractions/${id}`, {}, function(response) {
         $(`#${id}-delete`).removeAttr("disabled", "disabled");
-        window.location = "/admin/attractions";
+        location.reload();
     }, function(response) {
         $(`#${id}-delete`).removeAttr("disabled", "disabled");
     });

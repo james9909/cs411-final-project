@@ -12,17 +12,17 @@ $("form[action='update']").submit(function(e) {
     let categories = $(`#${restaurant_id}-categories`).val();
     $(`#${restaurant_id}-submit`).attr("disabled", "disabled");
     apiCall("POST", `/api/restaurants/${restaurant_id}`, {
-        name: name,
-        address: address,
-        rating: rating,
-        latitude: latitude,
-        longitude: longitude,
-        yelp_url: yelp_url,
-        categories: categories
+        name,
+        address,
+        rating,
+        latitude,
+        longitude,
+        yelp_url,
+        categories
     },
         function(response) {
             $(`#${restaurant_id}-submit`).removeAttr("disabled", "disabled");
-            window.location = "/admin/restaurants";
+            location.reload();
         },
         function(response) {
             $(`#${restaurant_id}-submit`).removeAttr("disabled", "disabled");
@@ -42,17 +42,17 @@ $("#add-form").submit(function(e) {
     let categories = $(`#add-categories`).val();
     $(`#add-submit`).attr("disabled", "disabled");
     apiCall("POST", `/api/restaurants`, {
-        name: name,
-        address: address,
-        rating: rating,
-        latitude: latitude,
-        longitude: longitude,
-        yelp_url: yelp_url,
-        categories: categories
+        name,
+        address,
+        rating,
+        latitude,
+        longitude,
+        yelp_url,
+        categories
     },
         function(response) {
             $(`#add-submit`).removeAttr("disabled", "disabled");
-            window.location = "/admin/restaurants";
+            location.reload();
         },
         function(response) {
             $(`#add-submit`).removeAttr("disabled", "disabled");
@@ -65,7 +65,7 @@ function deleteRestaurant(id) {
     $(`#${id}-delete`).attr("disabled", "disabled");
     apiCall("DELETE", `/api/restaurants/${id}`, {}, function(response) {
         $(`#${id}-delete`).removeAttr("disabled", "disabled");
-        window.location = "/admin/restaurants";
+        location.reload();
     }, function(response) {
         $(`#${id}-delete`).removeAttr("disabled", "disabled");
     });

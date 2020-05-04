@@ -95,11 +95,11 @@
                         </div>
                         <div class="form-group col">
                             <label for="{{ restaurant["_id"] }}-lat" class="sr-only">Latitude</label>
-                            <input type="number" class="form-control" id="{{ restaurant["_id"] }}-lat" step="any" value="{{ restaurant["latitude"] }}">
+                            <input type="number" class="form-control" id="{{ restaurant["_id"] }}-lat" step="any" value="{{ restaurant["location"]["coordinates"][0] }}">
                         </div>
                         <div class="form-group col">
                             <label for="{{ restaurant["_id"] }}-long" class="sr-only">Longitude</label>
-                            <input type="number" class="form-control" id="{{ restaurant["_id"] }}-long" step="any "value="{{ restaurant["longitude"] }}">
+                            <input type="number" class="form-control" id="{{ restaurant["_id"] }}-long" step="any "value="{{ restaurant["location"]["coordinates"][1] }}">
                         </div>
                         <div class="form-group col">
                             <label for="{{ restaurant["_id"] }}-categories" class="sr-only">Categories</label>

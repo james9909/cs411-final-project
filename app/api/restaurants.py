@@ -12,9 +12,8 @@ def add_restaurant():
     db = app.mongo_client["cs411"]
     document = {
         "name": request.form["name"],
-        "rating": request.form["rating"],
-        "latitude": request.form["latitude"],
-        "longitude": request.form["longitude"],
+        "rating": float(request.form["rating"]),
+        "location": {"type": "Point", "coordinates": [float(request.form["latitude"]), float(request.form["longitude"])]},
         "address": request.form["address"],
         "categories": list(map(str.strip, request.form["categories"].split(","))),
         "yelp_url": request.form["yelp_url"]
@@ -30,9 +29,8 @@ def update_attractions(id):
     query = {
         "$set": {
             "name": request.form["name"],
-            "rating": request.form["rating"],
-            "latitude": request.form["latitude"],
-            "longitude": request.form["longitude"],
+            "rating": float(request.form["rating"]),
+            "location": {"type": "Point", "coordinates": [float(request.form["latitude"]), float(request.form["longitude"])]},
             "address": request.form["address"],
             "categories": list(map(str.strip, request.form["categories"].split(","))),
             "yelp_url": request.form["yelp_url"]

@@ -12,12 +12,11 @@ def add_airbnb():
     db = app.mongo_client["cs411"]
     document = {
         "name": request.form["name"],
-        "rating": request.form["rating"],
+        "rating": float(request.form["rating"]),
         "amenities": list(map(str.strip, request.form["amenities"].split(","))),
-        "latitude": request.form["latitude"],
-        "longitude": request.form["longitude"],
-        "reviews_per_month": request.form["reviews_per_month"],
-        "minimum_nights": request.form["minimum_nights"],
+        "location": {"type": "Point", "coordinates": [float(request.form["latitude"]), float(request.form["longitude"])]},
+        "reviews_per_month": float(request.form["reviews_per_month"]),
+        "minimum_nights": int(request.form["minimum_nights"]),
         "neighborhood":  request.form["neighborhood"]
     }
     db.airbnb.insert_one(document)
@@ -32,12 +31,11 @@ def update_airbnb(id):
     query = {
         "$set": {
             "name": request.form["name"],
-            "rating": request.form["rating"],
+            "rating": float(request.form["rating"]),
             "amenities": list(map(str.strip, request.form["amenities"].split(","))),
-            "latitude": request.form["latitude"],
-            "longitude": request.form["longitude"],
-            "reviews_per_month": request.form["reviews_per_month"],
-            "minimum_nights": request.form["minimum_nights"],
+            "location": {"type": "Point", "coordinates": [float(request.form["latitude"]), float(request.form["longitude"])]},
+            "reviews_per_month": float(request.form["reviews_per_month"]),
+            "minimum_nights": int(request.form["minimum_nights"]),
             "neighborhood":  request.form["neighborhood"]
         }
     }

@@ -24,7 +24,7 @@ $("form[action='update']").submit(function(e) {
     },
         function(response) {
             $(`#${airbnb_id}-submit`).removeAttr("disabled", "disabled");
-            window.location = "/admin/airbnbs";
+            location.reload();
         },
         function(response) {
             $(`#${airbnb_id}-submit`).removeAttr("disabled", "disabled");
@@ -56,7 +56,7 @@ $("#add-form").submit(function(e) {
     },
         function(response) {
             $(`#add-submit`).removeAttr("disabled", "disabled");
-            window.location = "/admin/airbnbs";
+            location.reload();
         },
         function(response) {
             $(`#add-submit`).removeAttr("disabled", "disabled");
@@ -68,7 +68,7 @@ function deleteAirbnb(id) {
     $(`#${id}-delete`).attr("disabled", "disabled");
     apiCall("DELETE", `/api/airbnbs/${id}`, {}, function(response) {
         $(`#${id}-delete`).removeAttr("disabled", "disabled");
-        window.location = "/admin/airbnbs";
+        location.reload();
     }, function(response) {
         $(`#${id}-delete`).removeAttr("disabled", "disabled");
     });
