@@ -58,3 +58,19 @@ def admin_restaurants():
         }
     data = app.mongo_client["cs411"].restaurants.find(query)
     return render_template("admin/restaurants.html", restaurants=data)
+
+
+@blueprint.route("/admin/airbnb")
+@admin_required
+def admin_airbnbs():
+    search_name = request.args.get("search_name", "", type=str)
+    query = {}
+    if search_name != "":
+        query = {
+            "name": {
+                "$regex": ".*{}.*".format(search_name),
+                "$options": "i"
+            }
+        }
+    data = app.mongo_client["cs411"].airbnb.find(query)
+    return render_template("admin/airbnb.html", airbnb=data)
