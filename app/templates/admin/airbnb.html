@@ -2,7 +2,7 @@
 
 {% block content %}
 <br/>
-<form class="form" action="/admin/airbnb" method="GET">
+<form class="form" action="/admin/airbnbs" method="GET">
   <div class="form-inline">
     <input type="text" class="form-control" id="search_name" name="search_name" placeholder="Search by name">
     <input type="submit" class="btn btn-primary" value="Search">
@@ -50,12 +50,12 @@
             </div>
             <div class="form-row">
               <div class="form-group col">
-                <label for="add-min_nights" class="sr-only">minimum_nights</label>
-                <input type="number" class="form-control" id="add-min_nights" step="any" placeholder="minimum_nights">
+                <label for="add-min_nights" class="sr-only">Minimum nights</label>
+                <input type="number" class="form-control" id="add-min_nights" placeholder="Minimum nights">
               </div>
               <div class="form-group col">
-                <label for="add-reviews" class="sr-only">Reviews_per_month</label>
-                <input type="number" class="form-control" id="add-reviews" step="any" placeholder="Reviews_per_month">
+                <label for="add-reviews" class="sr-only">Reviews per month</label>
+                <input type="number" class="form-control" id="add-reviews" step="any" placeholder="Reviews per month">
               </div>
               <div class="form-group col">
                 <label for="add-rating" class="sr-only">Rating</label>
@@ -69,53 +69,61 @@
     </div>
     <br/>
 
-    {% for restaurant in restaurants %}
+    {% for airbnb in airbnbs %}
     <div class="card">
-        <div class="card-header" id="{{ restaurant["_id"] }}-id">
+        <div class="card-header" id="{{ airbnb["_id"] }}-id">
             <h5 class="mb-0">
-                <div id="{{ restaurant["_id"] }}-header" data-toggle="collapse" data-target="#{{ restaurant["_id"] }}-collapse" aria-expanded="true" aria-controls="{{ restaurant["_id"] }}-collapse">
-                    {{ restaurant["name"] }}
+                <div id="{{ airbnb["_id"] }}-header" data-toggle="collapse" data-target="#{{ airbnb["_id"] }}-collapse" aria-expanded="true" aria-controls="{{ airbnb["_id"] }}-collapse">
+                    {{ airbnb["name"] }}
                 </div>
             </h5>
         </div>
 
-        <div id="{{ restaurant["_id"] }}-collapse" class="collapse show" aria-labelledby="{{ restaurant["_id"] }}-id" data-parent="#accordion">
+        <div id="{{ airbnb["_id"] }}-collapse" class="collapse show" aria-labelledby="{{ airbnb["_id"] }}-id" data-parent="#accordion">
             <div class="card-body">
-                <form class="form" id="{{ restaurant["_id"] }}" action="update">
+                <form class="form" id="{{ airbnb["_id"] }}" action="update">
                     <div class="form-row">
                         <div class="form-group col">
-                            <label for="{{ restaurant["_id"] }}-name" class="sr-only">Name</label>
-                            <input type="text" class="form-control" id="{{ restaurant["_id"] }}-name" value="{{ restaurant["name"] }}">
+                            <label for="{{ airbnb["_id"] }}-name" class="sr-only">Name</label>
+                            <input type="text" class="form-control" id="{{ airbnb["_id"] }}-name" value="{{ airbnb["name"] }}">
                         </div>
                         <div class="form-group col">
-                            <label for="{{ restaurant["_id"] }}-addr" class="sr-only">Address</label>
-                            <input type="text" class="form-control" id="{{ restaurant["_id"] }}-addr" value="{{ restaurant["address"] }}">
+                            <label for="{{ airbnb["_id"] }}-lat" class="sr-only">Latitude</label>
+                            <input type="number" class="form-control" id="{{ airbnb["_id"] }}-lat" step="any" value="{{ airbnb["latitude"] }}">
                         </div>
                         <div class="form-group col">
-                            <label for="{{ restaurant["_id"] }}-url" class="sr-only">Yelp URL</label>
-                            <input type="text" class="form-control" id="{{ restaurant["_id"] }}-url" value="{{ restaurant["yelp_url"] }}">
+                            <label for="{{ airbnb["_id"] }}-long" class="sr-only">Longitude</label>
+                            <input type="number" class="form-control" id="{{ airbnb["_id"] }}-long" step="any" value="{{ airbnb["longitude"] }}">
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col">
-                            <label for="{{ restaurant["_id"] }}-rating" class="sr-only">Rating</label>
-                            <input type="number" class="form-control" id="{{ restaurant["_id"] }}-rating" step="any" value="{{ restaurant["rating"] }}">
-                        </div>
-                        <div class="form-group col">
-                            <label for="{{ restaurant["_id"] }}-lat" class="sr-only">Latitude</label>
-                            <input type="number" class="form-control" id="{{ restaurant["_id"] }}-lat" step="any" value="{{ restaurant["latitude"] }}">
-                        </div>
-                        <div class="form-group col">
-                            <label for="{{ restaurant["_id"] }}-long" class="sr-only">Longitude</label>
-                            <input type="number" class="form-control" id="{{ restaurant["_id"] }}-long" step="any "value="{{ restaurant["longitude"] }}">
-                        </div>
-                        <div class="form-group col">
-                            <label for="{{ restaurant["_id"] }}-categories" class="sr-only">Categories</label>
-                            <input type="text" class="form-control" id="{{ restaurant["_id"] }}-categories" value="{{ ",".join(restaurant["categories"]) }}">
-                        </div>
+                      <div class="form-group col">
+                        <label for="{{ airbnb["_id"] }}-amenities" class="sr-only">Amenities</label>
+                        <input type="text" class="form-control" id="{{ airbnb["_id"] }}-amenities" placeholder="Amenities" value="{{ ",".join(airbnb["amenities"]) }}">
+                      </div>
                     </div>
-                    <button id="{{ restaurant["_id"] }}-submit" type="submit" class="btn btn-primary mb-2">Update</button>
-                    <button id="{{ restaurant["_id"] }}-delete" type="button" class="btn btn-danger mb-2" onclick="deleteRestaurant('{{ restaurant["_id"] }}')">Delete</button>
+                    <div class="form-row">
+                      <div class="form-group col">
+                        <label for="{{ airbnb["_id"] }}-neighborhood" class="sr-only">Neighborhood</label>
+                        <input type="text" class="form-control" id="{{ airbnb["_id"] }}-neighborhood" placeholder="Neighborhood" value="{{ airbnb["neighborhood"] }}">
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col">
+                        <label for="{{ airbnb["_id"] }}-min_nights" class="sr-only">Minimum nights</label>
+                        <input type="number" class="form-control" id="{{ airbnb["_id"] }}-min_nights" step="any" placeholder="Minimum nights" value="{{ airbnb["minimum_nights"] }}">
+                      </div>
+                      <div class="form-group col">
+                        <label for="{{ airbnb["_id"] }}-reviews" class="sr-only">Reviews per month</label>
+                        <input type="number" class="form-control" id="{{ airbnb["_id"] }}-reviews" step="any" placeholder="Reviews per month" value="{{ airbnb["reviews_per_month"] }}">
+                      </div>
+                      <div class="form-group col">
+                        <label for="{{ airbnb["_id"] }}-rating" class="sr-only">Rating</label>
+                        <input type="number" class="form-control" id="{{ airbnb["_id"] }}-rating" step="any" placeholder="Rating" value="{{ airbnb["rating"] }}">
+                      </div>
+                    </div>
+                    <button id="{{ airbnb["_id"] }}-submit" type="submit" class="btn btn-primary mb-2">Update</button>
+                    <button id="{{ airbnb["_id"] }}-delete" type="button" class="btn btn-danger mb-2" onclick="deleteAirbnb('{{ airbnb["_id"] }}')">Delete</button>
                 </form>
             </div>
         </div>
@@ -126,5 +134,5 @@
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript" src="{{ url_for('static', filename='js/admin/restaurants.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/admin/airbnbs.js') }}"></script>
 {% endblock %}

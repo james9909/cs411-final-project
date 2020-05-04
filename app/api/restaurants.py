@@ -7,7 +7,7 @@ blueprint = Blueprint("api_restaurants", __name__)
 
 @blueprint.route("/", methods=["POST"])
 @api_view
-@login_required
+@admin_required
 def add_restaurant():
     db = app.mongo_client["cs411"]
     document = {

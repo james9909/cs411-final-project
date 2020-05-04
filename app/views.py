@@ -60,7 +60,7 @@ def admin_restaurants():
     return render_template("admin/restaurants.html", restaurants=data)
 
 
-@blueprint.route("/admin/airbnb")
+@blueprint.route("/admin/airbnbs")
 @admin_required
 def admin_airbnbs():
     search_name = request.args.get("search_name", "", type=str)
@@ -73,4 +73,4 @@ def admin_airbnbs():
             }
         }
     data = app.mongo_client["cs411"].airbnb.find(query)
-    return render_template("admin/airbnb.html", airbnb=data)
+    return render_template("admin/airbnb.html", airbnbs=data)

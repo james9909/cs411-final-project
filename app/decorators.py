@@ -11,7 +11,7 @@ def api_view(f):
             if not isinstance(result, dict):
                 return result
         except Exception:
-            result = {"message": "Something went wrong!"}
+            result = {"message": "Something went wrong!", "status": 500}
             traceback.print_exc()
         status = result.pop("status", 200)
         return make_response(jsonify(result), status)
