@@ -10,7 +10,7 @@ app = create_app()
 
 manager = Manager(app)
 
-ServerCommand = Server(host="0.0.0.0", port=8001, use_debugger=True, threaded=True)
+ServerCommand = Server(host="0.0.0.0", port=8000, use_debugger=True, threaded=True)
 manager.add_command("serve", ServerCommand)
 
 manager.add_command("db", MigrateCommand)

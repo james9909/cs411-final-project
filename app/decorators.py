@@ -21,7 +21,7 @@ def login_required(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
         if "uid" not in session:
-            return redirect(url_for("views.index"))
+            return redirect(url_for("views.login", _external=True))
         return f(*args, **kwargs)
     return wrapper
 
@@ -30,6 +30,6 @@ def admin_required(f):
     @login_required
     def wrapper(*args, **kwargs):
         if not session["is_admin"]:
-            return redirect(url_for("views.index"))
+            return redirect(url_for("views.login", _external=True))
         return f(*args, **kwargs)
     return wrapper
