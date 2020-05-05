@@ -17,7 +17,10 @@ def add_airbnb():
         "location": {"type": "Point", "coordinates": [float(request.form["latitude"]), float(request.form["longitude"])]},
         "reviews_per_month": float(request.form["reviews_per_month"]),
         "minimum_nights": int(request.form["minimum_nights"]),
-        "neighborhood":  request.form["neighborhood"]
+        "neighborhood":  request.form["neighborhood"],
+        "airbnb_url": request.form["airbnb_url"],
+        "image_url": request.form["image_url"],
+        "price": float(request.form["price"])
     }
     db.airbnb.insert_one(document)
     return {"message": "Success!"}
@@ -36,7 +39,10 @@ def update_airbnb(id):
             "location": {"type": "Point", "coordinates": [float(request.form["latitude"]), float(request.form["longitude"])]},
             "reviews_per_month": float(request.form["reviews_per_month"]),
             "minimum_nights": int(request.form["minimum_nights"]),
-            "neighborhood":  request.form["neighborhood"]
+            "neighborhood":  request.form["neighborhood"],
+            "airbnb_url": request.form["airbnb_url"],
+            "image_url": request.form["image_url"],
+            "price": float(request.form["price"])
         }
     }
     db.airbnb.update_one({"_id": ObjectId(id)}, query)

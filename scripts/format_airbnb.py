@@ -15,7 +15,10 @@ with open("data/listings.csv") as f:
             "longitude": row["longitude"],
             "reviews_per_month": row["reviews_per_month"],
             "minimum_nights": row["minimum_nights"],
-            "neighborhood": row["neighbourhood_cleansed"]
+            "neighborhood": row["neighbourhood_cleansed"],
+            "airbnb_url": row["listing_url"],
+            "image_url": row["picture_url"],
+            "price": row["price"]
         })
 
 with open("data/listings.json", "w") as f:

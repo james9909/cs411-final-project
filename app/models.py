@@ -20,12 +20,7 @@ class Attraction(db.Model):
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
 
-# class ViewType(enum.Enum):
-#     RESTAURANT = "restaurant"
-#     ATTRACTION = "attraction"
-
-# class UserPreference(db.Model):
-#     __tablename__ = "user_preferences"
-#     user_id = db.Column(db.Integer, db.ForeignKey("user.id", ondelete='CASCADE'), primary_key=True)
-#     type = db.Column(db.Enum(ViewType), nullable=False)
-#     item_id = db.Column(db.Integer, nullable=False, primary_key=True)
+class UserAttraction(db.Model):
+    __tablename__ = "user_attractions"
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+    attraction_id = db.Column(db.Integer, db.ForeignKey("attractions.id", ondelete="CASCADE"), primary_key=True)

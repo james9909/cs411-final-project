@@ -11,6 +11,9 @@ $("form[action='update']").submit(function(e) {
     let rating = parseFloat($(`#${airbnb_id}-rating`).val());
     let latitude = parseFloat($(`#${airbnb_id}-lat`).val());
     let longitude = parseFloat($(`#${airbnb_id}-long`).val());
+    let airbnb_url = $(`#${airbnb_id}-airbnb_url`).val();
+    let image_url = $(`#${airbnb_id}-image_url`).val();
+    let price = parseFloat($(`#${airbnb_id}-price`).val());
     $(`#${airbnb_id}-submit`).attr("disabled", "disabled");
     apiCall("POST", `/api/airbnbs/${airbnb_id}`, {
         name,
@@ -20,7 +23,10 @@ $("form[action='update']").submit(function(e) {
         reviews_per_month,
         rating,
         latitude,
-        longitude
+        longitude,
+        airbnb_url,
+        image_url,
+        price
     },
         function(response) {
             $(`#${airbnb_id}-submit`).removeAttr("disabled", "disabled");
@@ -43,6 +49,9 @@ $("#add-form").submit(function(e) {
     let rating = parseFloat($(`#add-rating`).val());
     let latitude = parseFloat($(`#add-lat`).val());
     let longitude = parseFloat($(`#add-long`).val());
+    let airbnb_url = $(`#add-airbnb_url`).val();
+    let image_url = $(`#add-image_url`).val();
+    let price = parseFloat($(`#add-price`).val());
     $(`#add-submit`).attr("disabled", "disabled");
     apiCall("POST", `/api/airbnbs`, {
         name,
@@ -52,7 +61,10 @@ $("#add-form").submit(function(e) {
         reviews_per_month,
         rating,
         latitude,
-        longitude
+        longitude,
+        airbnb_url,
+        image_url,
+        price
     },
         function(response) {
             $(`#add-submit`).removeAttr("disabled", "disabled");

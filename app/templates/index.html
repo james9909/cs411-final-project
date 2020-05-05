@@ -14,5 +14,37 @@
         <p style="text-align:center; font-family:Avenir; font-size:20px">This is a normal account. </p>
       {% endif %}
     {% endif %}
+
+    {% set ns = namespace(last=false) %}
+    {% for airbnb_group in airbnbs | batch(3) %}
+    {% set ns.last = loop.last %}
+    {% if not ns.last %}
+    <div class="card-group">
+    {% else %}
+    {% endif %}
+      {% for airbnb in airbnb_group %}
+      {% if ns.last %}
+      <div class="no-gutters">
+        <div class="col-md-4">
+      {% endif %}
+        <div class="card">
+          <img class="card-img-top" src="{{ airbnb["image_url"] }}" alt="Image preview" height="200" width="300"/>
+          <div class="card-body">
+            <a href="/airbnb/{{ airbnb["_id"] }}"><h5>{{ airbnb["name"] }}</h5></a>
+            Rating: {{ airbnb["rating"] }}
+            <br>
+            Price: ${{ airbnb["price"] }}/night
+          </div>
+        </div>
+      {% if ns.last %}
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    {% if not ns.last %}
+    </div>
+    <br>
+    {% endif %}
+    {% endfor %}
   </body>
 {% endblock %}

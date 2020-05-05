@@ -19,7 +19,10 @@ with open("data/listings.json", "r") as f:
             "location": {"type": "Point", "coordinates": [float(airbnb["latitude"]), float(airbnb["longitude"])]},
             "reviews_per_month": airbnb["reviews_per_month"],
             "minimum_nights": airbnb["minimum_nights"],
-            "neighborhood": airbnb["neighborhood"]
+            "neighborhood": airbnb["neighborhood"],
+            "airbnb_url": airbnb["airbnb_url"],
+            "image_url": airbnb["image_url"],
+            "price": airbnb["price"][1:]
         }
         client["cs411"].airbnb.insert_one(document)
 client["cs411"].airbnb.create_index([("location", GEOSPHERE)])

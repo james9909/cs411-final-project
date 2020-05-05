@@ -8,7 +8,8 @@ blueprint = Blueprint("views", __name__)
 @blueprint.route("/", methods=["GET"])
 @login_required
 def index():
-    return render_template("index.html")
+    airbnbs = app.mongo_client["cs411"].airbnb.find()
+    return render_template("index.html", airbnbs=airbnbs)
 
 @blueprint.route("/register", methods=["GET"])
 def register():
