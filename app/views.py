@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, session, redirect, url_for, request, current_app as app
+from bson import ObjectId
+from flask import Blueprint, render_template, session, redirect, url_for, request, current_app as app, abort
 
 from app.decorators import admin_required, login_required
 from app.models import db
@@ -23,6 +24,21 @@ def login():
 def logout():
     session.clear()
     return render_template("index.html")
+
+@blueprint.route("/airbnb/<id>", methods=["GET"])
+@login_required
+def view_airbnb(id):
+    airbnb = app.mongo_client["cs411"].airbnb.find_one({"_id": ObjectId(id)})
+    if airbnb is None:
+        return abort(404)
+    nearby_restaurants = list(app.mongo_client["cs411"].restaurants.find({
+        "location": {
+            "$near": {
+                "$geometry": airbnb["location"]
+            }
+        }
+    }))
+    return render_template("airbnb.html", airbnb=airbnb, nearby_restaurants=nearby_restaurants)
 
 @blueprint.route("/admin/attractions")
 @admin_required

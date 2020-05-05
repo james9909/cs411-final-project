@@ -7,6 +7,7 @@ with open("data/listings.csv") as f:
     reader = csv.DictReader(f)
     for row in reader:
         amenities = list(map(lambda x: x.strip("\""), row["amenities"][1:-1].split(",")))
+        amenities = list(filter(lambda x: "translation missing" not in x, amenities))
         data.append({
             "name": row["name"],
             "rating": row["review_scores_rating"],

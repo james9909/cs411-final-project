@@ -9,7 +9,7 @@ seen = set()
 client = MongoClient(os.environ["MONGODB_DATABASE_URI"])
 client.server_info()
 
-client["cs411"].airbnb.drop()
+client["cs411"].restaurants.drop()
 with open("data/yelp_restaurants.json", "r") as f:
     data = json.loads(f.read())
 
@@ -29,4 +29,4 @@ with open("data/yelp_restaurants.json", "r") as f:
         if len(seen) == 150:
             break
 
-client["cs411"].airbnb.create_index([("location", GEOSPHERE)])
+client["cs411"].restaurants.create_index([("location", GEOSPHERE)])
