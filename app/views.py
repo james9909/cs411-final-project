@@ -30,13 +30,63 @@ def view_airbnb(id):
     airbnb = app.mongo_client["cs411"].airbnb.find_one({"_id": ObjectId(id)})
     if airbnb is None:
         return abort(404)
-    nearby_restaurants = list(app.mongo_client["cs411"].restaurants.find({
-        "location": {
-            "$near": {
-                "$geometry": airbnb["location"]
+
+    pipeline = [
+        {
+            "$geoNear": {
+                "near": airbnb["location"],
+                "distanceField": "location"
+            }
+        },
+        {
+            "$lookup": {
+                "from": "user_restaurants",
+                "let": {
+                    "localId": "$_id",
+                },
+                "pipeline": [
+                    {
+                        "$match": {
+                            "$expr": {
+                                "$and": [
+                                    {
+                                        "$eq": [
+                                            "$restaurant_id",
+                                            "$$localId"
+                                        ]
+                                    },
+                                    {
+                                        "$eq": [
+                                            "$user_id",
+                                            session["uid"]
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "as": "result"
+            }
+        },
+        {
+            "$project": {
+                "name": 1,
+                "is_favorited": {
+                    "$cond": [
+                        {
+                            "$eq": ["$result", []]
+                        },
+                        False,
+                        True
+                    ]
+                },
+                "categories": 1
             }
         }
-    }))
+    ]
+
+    nearby_restaurants = list(app.mongo_client["cs411"].restaurants.aggregate(pipeline))
     query = """
 SELECT a.id, a.name, a.address, (ua.user_id IS NOT NULL) as is_favorited
 FROM attractions a LEFT JOIN user_attractions ua ON (a.id = ua.attraction_id AND ua.user_id = :user_id)

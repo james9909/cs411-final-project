@@ -47,3 +47,21 @@ def delete_attractions(id):
     db = app.mongo_client["cs411"]
     db.restaurants.delete_one({"_id": ObjectId(id)})
     return {"message": "Success!"}
+
+@blueprint.route("/<id>/favorite", methods=["POST"])
+@api_view
+@login_required
+def favorite_restaurant(id):
+    db = app.mongo_client["cs411"]
+    is_favorited = db.user_restaurants.find_one({"user_id": session["uid"], "restaurant_id": ObjectId(id)})
+    if is_favorited is None:
+        db.user_restaurants.insert({
+            "user_id": session["uid"],
+            "restaurant_id": ObjectId(id)
+        })
+    else:
+        db.user_restaurants.delete_one({
+            "user_id": session["uid"],
+            "restaurant_id": ObjectId(id)
+        })
+    return {"message": "Success!"}

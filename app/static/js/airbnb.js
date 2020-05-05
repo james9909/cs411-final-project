@@ -9,7 +9,7 @@ function flip(attraction_id) {
     }
 }
 
-function star(attraction_id) {
+function starAttraction(attraction_id) {
     if (starring[attraction_id]) {
         return;
     }
@@ -19,5 +19,18 @@ function star(attraction_id) {
         starring[attraction_id] = false;
     }, function(response) {
         starring[attraction_id] = false;
+    });
+};
+
+function starRestaurant(restaurant_id) {
+    if (starring[restaurant_id]) {
+        return;
+    }
+    starring[restaurant_id] = true;
+    apiCall("POST", `/api/restaurants/${restaurant_id}/favorite`, {}, function(response) {
+        flip(restaurant_id);
+        starring[restaurant_id] = false;
+    }, function(response) {
+        starring[restaurant_id] = false;
     });
 };
