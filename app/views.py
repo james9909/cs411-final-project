@@ -44,6 +44,41 @@ def logout():
     session.clear()
     return render_template("index.html")
 
+@blueprint.route("/profile")
+@login_required
+def profile():
+    restaurant_query = [
+        {
+            "$match": {
+                "user_id": session["uid"]
+            }
+        },
+        {
+            "$lookup": {
+                "from": "restaurants",
+                "localField": "restaurant_id",
+                "foreignField": "_id",
+                "as": "restaurant"
+            }
+        },
+        {
+            "$unwind": "$restaurant"
+        },
+        {
+            "$project": {
+                "_id": 0,
+                "restaurant": 1
+            }
+        }
+    ]
+    attraction_query = """
+    SELECT a.id, a.name
+    FROM attractions a INNER JOIN user_attractions ua ON a.id = ua.attraction_id AND ua.user_id = :user_id
+    """
+    favorite_attractions = db.session.execute(attraction_query, {"user_id": session["uid"]}).fetchall()
+    favorite_restaurants = list(x["restaurant"] for x in app.mongo_client["cs411"].user_restaurants.aggregate(restaurant_query))
+    return render_template("profile.html", favorite_attractions=favorite_attractions, favorite_restaurants=favorite_restaurants)
+
 @blueprint.route("/airbnb/<id>", methods=["GET"])
 @login_required
 def view_airbnb(id):

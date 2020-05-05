@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm">
+        Favorite restaurants:
+        <div class="overflow-auto">
+            <ul class="list-group" style="max-height: 300px; overflow: scroll;">
+                {% for restaurant in favorite_restaurants %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="/restaurant/{{ restaurant["_id"] }}">{{ restaurant["name"] }}</a>
+                    <div>
+                    {% for category in restaurant["categories"] %}
+                    <span class="badge badge-secondary badge-pill">{{ category }}</span>
+                    {% endfor %}
+                    <span id="{{ restaurant["_id"] }}-star" class="material-icons" onclick="starRestaurant('{{ restaurant["_id"] }}')">
+                    star
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm">
+        Favorite attractions:
+        <div class="overflow-auto">
+            <ul class="list-group" style="max-height: 300px; overflow: scroll;">
+                {% for attraction in favorite_attractions %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="/attraction/{{ attraction["id"] }}">{{ attraction["name"] }}</a>
+                    <span id="{{ attraction["id"] }}-star" class="material-icons" onclick="starAttraction('{{ attraction["id"] }}')">
+                    star
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/airbnb.js') }}"></script>
+{% endblock %}
