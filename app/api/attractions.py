@@ -82,6 +82,7 @@ def update_attractions(id):
 @admin_required
 def delete_attractions(id):
     db.session.execute("DELETE FROM attractions WHERE id = :id", {"id": id})
+    db.session.execute("DELETE FROM user_attractions WHERE attraction_id = :id", {"id": id})
     db.session.commit()
     return {"status": 200, "message": "Attraction deleted"}
 

@@ -24,7 +24,7 @@ def add_restaurant():
 @blueprint.route("/<id>", methods=["POST"])
 @api_view
 @admin_required
-def update_attractions(id):
+def update_restaurant(id):
     db = app.mongo_client["cs411"]
     query = {
         "$set": {
@@ -43,9 +43,10 @@ def update_attractions(id):
 @blueprint.route("/<id>", methods=["DELETE"])
 @api_view
 @admin_required
-def delete_attractions(id):
+def delete_restaurant(id):
     db = app.mongo_client["cs411"]
     db.restaurants.delete_one({"_id": ObjectId(id)})
+    db.user_restaurants.delete_many({"restaurant_id": ObjectId(id)})
     return {"message": "Success!"}
 
 @blueprint.route("/<id>/favorite", methods=["POST"])
@@ -64,4 +65,4 @@ def favorite_restaurant(id):
             "user_id": session["uid"],
             "restaurant_id": ObjectId(id)
         })
-    return {"message": "Success!"}
+    return {"status": 200}
