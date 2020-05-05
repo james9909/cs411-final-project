@@ -19,7 +19,7 @@ with open("data/yelp_restaurants.json", "r") as f:
         print("Importing {}".format(restaurant["name"]))
         client["cs411"].restaurants.insert_one({
             "name": restaurant["name"],
-            "rating": restaurant["rating"],
+            "rating": float(restaurant["rating"]),
             "location": {"type": "Point", "coordinates": [restaurant["latitude"], restaurant["longitude"]]},
             "address": restaurant["address"],
             "categories": restaurant["categories"],

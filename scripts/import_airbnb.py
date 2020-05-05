@@ -14,15 +14,15 @@ with open("data/listings.json", "r") as f:
         print("Importing {}".format(airbnb["name"]))
         document = {
             "name": airbnb["name"],
-            "rating": airbnb["rating"],
+            "rating": int(airbnb["rating"] or "0"),
             "amenities": airbnb["amenities"],
             "location": {"type": "Point", "coordinates": [float(airbnb["latitude"]), float(airbnb["longitude"])]},
-            "reviews_per_month": airbnb["reviews_per_month"],
-            "minimum_nights": airbnb["minimum_nights"],
+            "reviews_per_month": float(airbnb["reviews_per_month"] or 0),
+            "minimum_nights": int(airbnb["minimum_nights"] or 1),
             "neighborhood": airbnb["neighborhood"],
             "airbnb_url": airbnb["airbnb_url"],
             "image_url": airbnb["image_url"],
-            "price": airbnb["price"][1:]
+            "price": float(airbnb["price"][1:])
         }
         client["cs411"].airbnb.insert_one(document)
 client["cs411"].airbnb.create_index([("location", GEOSPHERE)])
