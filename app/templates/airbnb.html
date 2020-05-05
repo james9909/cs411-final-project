@@ -45,10 +45,21 @@ Minimum number of nights: {{ airbnb["minimum_nights"] }}
                 {% for attraction in nearby_attractions %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a href="/attraction/{{ attraction["id"] }}">{{ attraction["name"] }}</a>
+                    <span id="{{ attraction["id"] }}-star" class="material-icons" onclick="star('{{ attraction["id"] }}')">
+                    {% if attraction["is_favorited"] %}
+                    star
+                    {% else %}
+                    star_border
+                    {% endif %}
+                    </span>
                 </li>
                 {% endfor %}
             </ul>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/airbnb.js') }}"></script>
 {% endblock %}

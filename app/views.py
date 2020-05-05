@@ -37,7 +37,13 @@ def view_airbnb(id):
             }
         }
     }))
-    nearby_attractions = db.session.execute("SELECT * FROM attractions ORDER BY (POW(latitude-:lat, 2)+POW(longitude-:long, 2))", {
+    query = """
+SELECT a.id, a.name, a.address, (ua.user_id IS NOT NULL) as is_favorited
+FROM attractions a LEFT JOIN user_attractions ua ON (a.id = ua.attraction_id AND ua.user_id = :user_id)
+ORDER BY (POW(a.latitude-:lat, 2)+POW(a.longitude-:long, 2))
+    """
+    nearby_attractions = db.session.execute(query, {
+        "user_id": session["uid"],
         "lat": airbnb["location"]["coordinates"][0],
         "long": airbnb["location"]["coordinates"][1]
     }).fetchall()

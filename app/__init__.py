@@ -34,6 +34,9 @@ def create_app(config=Config()):
         def inject_user():
             return dict(user=session)
 
+        app.jinja_env.trim_blocks = True
+        app.jinja_env.lstrip_blocks = True
+
         app.register_blueprint(views.blueprint, url_prefix="/")
         app.register_blueprint(api.user.blueprint, url_prefix="/api/user")
         app.register_blueprint(api.airbnb.blueprint, url_prefix="/api/airbnbs")
