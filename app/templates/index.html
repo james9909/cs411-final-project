@@ -6,13 +6,7 @@
     {% if not user %}
       <p style="text-align:center; font-family:Avenir; font-size:20px">Please log in with your accounts.</p>
     {% else %}
-      {% if user["is_admin"] %}
-      <p style="text-align:center; font-family:Avenir; font-size:20px"> Hello! {{session.username}}!</p>
-        <p style="text-align:center; font-family:Avenir; font-size:20px">This is an admin account. </p>
-      {% else %}
-        <p style="text-align:center; font-family:Avenir; font-size:20px"> Hello! {{session.username}}!</p>
-        <p style="text-align:center; font-family:Avenir; font-size:20px">This is a normal account. </p>
-      {% endif %}
+      <p style="text-align:center; font-family:Avenir; font-size:20px"> Hello {{session.username}}!</p>
 
     <br/>
     <form class="form" action="/" method="GET">
