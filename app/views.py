@@ -9,8 +9,8 @@ blueprint = Blueprint("views", __name__)
 @blueprint.route("/", methods=["GET"])
 def index():
     search_name = request.args.get("search_name", "", type=str)
-    max_price = request.args.get("max_price", "", type=str)
-    lowest_rating = request.args.get("lowest_rating", "", type=str)
+    max_price = request.args.get("max_price", "", type=float)
+    lowest_rating = request.args.get("lowest_rating", "", type=int)
     query = {}
     if search_name != "":
         query["name"] = {
