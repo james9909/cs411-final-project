@@ -37,7 +37,11 @@ def view_airbnb(id):
             }
         }
     }))
-    return render_template("airbnb.html", airbnb=airbnb, nearby_restaurants=nearby_restaurants)
+    nearby_attractions = db.session.execute("SELECT * FROM attractions ORDER BY (POW(latitude-:lat, 2)+POW(longitude-:long, 2))", {
+        "lat": airbnb["location"]["coordinates"][0],
+        "long": airbnb["location"]["coordinates"][1]
+    }).fetchall()
+    return render_template("airbnb.html", airbnb=airbnb, nearby_restaurants=nearby_restaurants, nearby_attractions=nearby_attractions)
 
 @blueprint.route("/admin/attractions")
 @admin_required
