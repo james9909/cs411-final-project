@@ -8,8 +8,28 @@ blueprint = Blueprint("views", __name__)
 
 @blueprint.route("/", methods=["GET"])
 def index():
-    airbnbs = app.mongo_client["cs411"].airbnb.find()
-    return render_template("index.html", airbnbs=airbnbs)
+    search_name = request.args.get("search_name", "", type=str)
+    max_price = request.args.get("max_price", "", type=str)
+    lowest_rating = request.args.get("lowest_rating", "", type=str)
+    query = {}
+    if search_name != "":
+        query["name"] = {
+                "$regex": ".*{}.*".format(search_name),
+                "$options": "i"
+                }
+
+    if max_price != "":
+        query["price"] = {
+                "$lte": max_price
+            }
+
+    if lowest_rating != "":
+        query["rating"] = {
+                "$gte": lowest_rating
+            }
+
+    data = app.mongo_client["cs411"].airbnb.find(query)
+    return render_template("index.html", airbnbs=data)
 
 @blueprint.route("/register", methods=["GET"])
 def register():
