@@ -7,7 +7,6 @@ from app.models import db
 blueprint = Blueprint("views", __name__)
 
 @blueprint.route("/", methods=["GET"])
-@login_required
 def index():
     airbnbs = app.mongo_client["cs411"].airbnb.find()
     return render_template("index.html", airbnbs=airbnbs)
