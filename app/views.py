@@ -159,11 +159,11 @@ ORDER BY (POW(a.latitude-:lat, 2)+POW(a.longitude-:long, 2))
 def admin_attractions():
     search_name = request.args.get("search_name", "", type=str)
     if search_name != "":
-        result = db.session.execute("SELECT id, name, address, rating, latitude, longitude FROM attractions WHERE name LIKE :name", {
+        result = db.session.execute("SELECT id, name, address, rating, latitude, longitude, image_url FROM attractions WHERE name LIKE :name", {
             "name": "%" + search_name + "%"
         }).fetchall()
     else:
-        result = db.session.execute("SELECT id, name, address, rating, latitude, longitude FROM attractions").fetchall()
+        result = db.session.execute("SELECT id, name, address, rating, latitude, longitude, image_url FROM attractions").fetchall()
     data = []
     for row in result:
         data.append({
@@ -172,7 +172,8 @@ def admin_attractions():
             "address": row[2],
             "rating": row[3],
             "latitude": row[4],
-            "longitude": row[5]
+            "longitude": row[5],
+            "image_url": row[6]
         })
     return render_template("admin/attractions.html", attractions=data)
 

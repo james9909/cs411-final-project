@@ -24,55 +24,55 @@
           <form class="form" id="add-form" action="create">
             <div class="form-row">
               <div class="form-group col">
-                <label for="add-name" class="sr-only">Name</label>
+                <label for="add-name">Name</label>
                 <input type="text" class="form-control" id="add-name" placeholder="Name of Airbnb">
               </div>
               <div class="form-group col">
-                <label for="add-lat" class="sr-only">Latitude</label>
+                <label for="add-lat">Latitude</label>
                 <input type="number" class="form-control" id="add-lat" step="any" placeholder="Latitude">
               </div>
               <div class="form-group col">
-                <label for="add-long" class="sr-only">Longitude</label>
+                <label for="add-long">Longitude</label>
                 <input type="number" class="form-control" id="add-long" step="any" placeholder="Longitude">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col">
-                <label for="add-amenities" class="sr-only">Amenities</label>
+                <label for="add-amenities">Amenities</label>
                 <input type="text" class="form-control" id="add-amenities" placeholder="Amenities">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col">
-                <label for="add-neighborhood" class="sr-only">Neighborhood</label>
+                <label for="add-neighborhood">Neighborhood</label>
                 <input type="text" class="form-control" id="add-neighborhood" placeholder="Neighborhood">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col">
-                <label for="add-min_nights" class="sr-only">Minimum nights</label>
+                <label for="add-min_nights">Minimum nights</label>
                 <input type="number" class="form-control" id="add-min_nights" placeholder="Minimum nights">
               </div>
               <div class="form-group col">
-                <label for="add-reviews" class="sr-only">Reviews per month</label>
+                <label for="add-reviews">Reviews per month</label>
                 <input type="number" class="form-control" id="add-reviews" step="any" placeholder="Reviews per month">
               </div>
               <div class="form-group col">
-                <label for="add-rating" class="sr-only">Rating</label>
+                <label for="add-rating">Rating</label>
                 <input type="number" class="form-control" id="add-rating" step="any" placeholder="Rating">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col">
-                <label for="add-airbnb_url" class="sr-only">Airbnb URL</label>
+                <label for="add-airbnb_url">Airbnb URL</label>
                 <input type="text" class="form-control" id="add-airbnb_url" placeholder="Airbnb URL">
               </div>
               <div class="form-group col">
-                <label for="add-image_url" class="sr-only">Image URL</label>
+                <label for="add-image_url">Image URL</label>
                 <input type="text" class="form-control" id="add-image_url" placeholder="Image URL">
               </div>
               <div class="form-group col">
-                <label for="add-price" class="sr-only">Price</label>
+                <label for="add-price">Price</label>
                 <input type="number" class="form-control" id="add-price" step="any" placeholder="Price">
               </div>
             </div>
@@ -98,55 +98,55 @@
                 <form class="form" id="{{ airbnb["_id"] }}" action="update">
                     <div class="form-row">
                         <div class="form-group col">
-                            <label for="{{ airbnb["_id"] }}-name" class="sr-only">Name</label>
+                            <label for="{{ airbnb["_id"] }}-name">Name</label>
                             <input type="text" class="form-control" id="{{ airbnb["_id"] }}-name" value="{{ airbnb["name"] }}">
                         </div>
                         <div class="form-group col">
-                            <label for="{{ airbnb["_id"] }}-lat" class="sr-only">Latitude</label>
+                            <label for="{{ airbnb["_id"] }}-lat">Latitude</label>
                             <input type="number" class="form-control" id="{{ airbnb["_id"] }}-lat" step="any" value="{{ airbnb["location"]["coordinates"][0] }}">
                         </div>
                         <div class="form-group col">
-                            <label for="{{ airbnb["_id"] }}-long" class="sr-only">Longitude</label>
+                            <label for="{{ airbnb["_id"] }}-long">Longitude</label>
                             <input type="number" class="form-control" id="{{ airbnb["_id"] }}-long" step="any" value="{{ airbnb["location"]["coordinates"][1] }}">
                         </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group col">
-                        <label for="{{ airbnb["_id"] }}-amenities" class="sr-only">Amenities</label>
+                        <label for="{{ airbnb["_id"] }}-amenities">Amenities</label>
                         <input type="text" class="form-control" id="{{ airbnb["_id"] }}-amenities" placeholder="Amenities" value="{{ ",".join(airbnb["amenities"]) }}">
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group col">
-                        <label for="{{ airbnb["_id"] }}-neighborhood" class="sr-only">Neighborhood</label>
+                        <label for="{{ airbnb["_id"] }}-neighborhood">Neighborhood</label>
                         <input type="text" class="form-control" id="{{ airbnb["_id"] }}-neighborhood" placeholder="Neighborhood" value="{{ airbnb["neighborhood"] }}">
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group col">
-                        <label for="{{ airbnb["_id"] }}-min_nights" class="sr-only">Minimum nights</label>
+                        <label for="{{ airbnb["_id"] }}-min_nights">Minimum nights</label>
                         <input type="number" class="form-control" id="{{ airbnb["_id"] }}-min_nights" step="any" placeholder="Minimum nights" value="{{ airbnb["minimum_nights"] }}">
                       </div>
                       <div class="form-group col">
-                        <label for="{{ airbnb["_id"] }}-reviews" class="sr-only">Reviews per month</label>
+                        <label for="{{ airbnb["_id"] }}-reviews">Reviews per month</label>
                         <input type="number" class="form-control" id="{{ airbnb["_id"] }}-reviews" step="any" placeholder="Reviews per month" value="{{ airbnb["reviews_per_month"] }}">
                       </div>
                       <div class="form-group col">
-                        <label for="{{ airbnb["_id"] }}-rating" class="sr-only">Rating</label>
+                        <label for="{{ airbnb["_id"] }}-rating">Rating</label>
                         <input type="number" class="form-control" id="{{ airbnb["_id"] }}-rating" step="any" placeholder="Rating" value="{{ airbnb["rating"] }}">
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group col">
-                        <label for="{{ airbnb["_id"] }}-airbnb_url" class="sr-only">Airbnb URL</label>
+                        <label for="{{ airbnb["_id"] }}-airbnb_url">Airbnb URL</label>
                         <input type="text" class="form-control" id="{{ airbnb["_id"] }}-airbnb_url" placeholder="Airbnb URL" value="{{ airbnb["airbnb_url"] }}">
                       </div>
                       <div class="form-group col">
-                        <label for="{{ airbnb["_id"] }}-image_url" class="sr-only">Image URL</label>
+                        <label for="{{ airbnb["_id"] }}-image_url">Image URL</label>
                         <input type="text" class="form-control" id="{{ airbnb["_id"] }}-image_url" placeholder="Image URL" value="{{ airbnb["image_url"] }}">
                       </div>
                       <div class="form-group col">
-                        <label for="{{ airbnb["_id"] }}-price" class="sr-only">Price</label>
+                        <label for="{{ airbnb["_id"] }}-price">Price</label>
                         <input type="number" class="form-control" id="{{ airbnb["_id"] }}-price" step="any" placeholder="Price" value="{{ airbnb["price"] }}">
                       </div>
                     </div>

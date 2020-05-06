@@ -24,25 +24,29 @@
           <form class="form" id="add-form" action="create">
             <div class="form-row">
               <div class="form-group col">
-                <label for="add-name" class="sr-only">Name</label>
+                <label for="add-name">Name</label>
                 <input type="text" class="form-control" id="add-name" placeholder="Name of Attraction">
               </div>
               <div class="form-group col">
-                <label for="add-addr" class="sr-only">Address</label>
+                <label for="add-addr">Address</label>
                 <input type="text" class="form-control" id="add-addr" placeholder="Address">
+              </div>
+              <div class="form-group col">
+                <label for="add-image-url">Image URL</label>
+                <input type="text" class="form-control" id="add-image-url" placeholder="Image URL">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col">
-                <label for="add-rating" class="sr-only">Rating</label>
+                <label for="add-rating">Rating</label>
                 <input type="number" class="form-control" id="add-rating" step="any" placeholder="Rating">
               </div>
               <div class="form-group col">
-                <label for="add-lat" class="sr-only">Latitude</label>
+                <label for="add-lat">Latitude</label>
                 <input type="number" class="form-control" id="add-lat" step="any" placeholder="Latitude">
               </div>
               <div class="form-group col">
-                <label for="add-long" class="sr-only">Longitude</label>
+                <label for="add-long">Longitude</label>
                 <input type="number" class="form-control" id="add-long" step="any" placeholder="Longitude">
               </div>
             </div>
@@ -68,25 +72,29 @@
                 <form class="form" id="{{ attraction["id"] }}" action="update">
                     <div class="form-row">
                         <div class="form-group col">
-                            <label for="{{ attraction["id"] }}-name" class="sr-only">Name</label>
+                            <label for="{{ attraction["id"] }}-name">Name</label>
                             <input type="text" class="form-control" id="{{ attraction["id"] }}-name" value="{{ attraction["name"] }}">
                         </div>
                         <div class="form-group col">
-                            <label for="{{ attraction["id"] }}-addr" class="sr-only">Address</label>
+                            <label for="{{ attraction["id"] }}-addr">Address</label>
                             <input type="text" class="form-control" id="{{ attraction["id"] }}-addr" value="{{ attraction["address"] }}">
+                        </div>
+                        <div class="form-group col">
+                            <label for="{{ attraction["id"] }}-image-url">Image URL</label>
+                            <input type="text" class="form-control" id="{{ attraction["id"] }}-image-url" value="{{ attraction["image_url"] }}">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col">
-                            <label for="{{ attraction["id"] }}-rating" class="sr-only">Rating</label>
+                            <label for="{{ attraction["id"] }}-rating">Rating</label>
                             <input type="number" class="form-control" id="{{ attraction["id"] }}-rating" step="any" value="{{ attraction["rating"] }}">
                         </div>
                         <div class="form-group col">
-                            <label for="{{ attraction["id"] }}-lat" class="sr-only">Latitude</label>
+                            <label for="{{ attraction["id"] }}-lat">Latitude</label>
                             <input type="number" class="form-control" id="{{ attraction["id"] }}-lat" step="any" value="{{ attraction["latitude"] }}">
                         </div>
                         <div class="form-group col">
-                            <label for="{{ attraction["id"] }}-long" class="sr-only">Longitude</label>
+                            <label for="{{ attraction["id"] }}-long">Longitude</label>
                             <input type="number" class="form-control" id="{{ attraction["id"] }}-long" step="any "value="{{ attraction["longitude"] }}">
                         </div>
                     </div>

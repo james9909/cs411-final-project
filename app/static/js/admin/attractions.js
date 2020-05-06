@@ -8,13 +8,15 @@ $("form[action='update']").submit(function(e) {
     let rating = parseFloat($(`#${attraction_id}-rating`).val());
     let latitude = parseFloat($(`#${attraction_id}-lat`).val());
     let longitude = parseFloat($(`#${attraction_id}-long`).val());
+    let image_url = $(`#${attraction_id}-image-url`).val()
     $(`#${attraction_id}-submit`).attr("disabled", "disabled");
     apiCall("POST", `/api/attractions/${attraction_id}`, {
         name,
         address,
         rating,
         latitude,
-        longitude
+        longitude,
+        image_url
     },
         function(response) {
             $(`#${attraction_id}-submit`).removeAttr("disabled", "disabled");
@@ -34,13 +36,15 @@ $("#add-form").submit(function(e) {
     let rating = parseFloat($(`#add-rating`).val());
     let latitude = parseFloat($(`#add-lat`).val());
     let longitude = parseFloat($(`#add-long`).val());
+    let image_url = $(`#add-image-url`).val();
     $(`#add-submit`).attr("disabled", "disabled");
     apiCall("POST", `/api/attractions`, {
         name,
         address,
         rating,
         latitude,
-        longitude
+        longitude,
+        image_url
     },
         function(response) {
             $(`#add-submit`).removeAttr("disabled", "disabled");

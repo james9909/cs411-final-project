@@ -24,33 +24,33 @@
           <form class="form" id="add-form" action="create">
             <div class="form-row">
               <div class="form-group col">
-                <label for="add-name" class="sr-only">Name</label>
+                <label for="add-name">Name</label>
                 <input type="text" class="form-control" id="add-name" placeholder="Name of Restaurant">
               </div>
               <div class="form-group col">
-                <label for="add-addr" class="sr-only">Address</label>
+                <label for="add-addr">Address</label>
                 <input type="text" class="form-control" id="add-addr" placeholder="Address">
               </div>
               <div class="form-group col">
-                  <label for="add-url" class="sr-only">Yelp URL</label>
+                  <label for="add-url">Yelp URL</label>
                   <input type="text" class="form-control" id="add-url" placeholder="Yelp URL">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col">
-                <label for="add-rating" class="sr-only">Rating</label>
+                <label for="add-rating">Rating</label>
                 <input type="number" class="form-control" id="add-rating" step="any" placeholder="Rating">
               </div>
               <div class="form-group col">
-                <label for="add-lat" class="sr-only">Latitude</label>
+                <label for="add-lat">Latitude</label>
                 <input type="number" class="form-control" id="add-lat" step="any" placeholder="Latitude">
               </div>
               <div class="form-group col">
-                <label for="add-long" class="sr-only">Longitude</label>
+                <label for="add-long">Longitude</label>
                 <input type="number" class="form-control" id="add-long" step="any" placeholder="Longitude">
               </div>
               <div class="form-group col">
-                <label for="add-categories" class="sr-only">Categories</label>
+                <label for="add-categories">Categories</label>
                 <input type="text" class="form-control" id="add-categories" placeholder="Categories">
               </div>
             </div>
@@ -76,33 +76,33 @@
                 <form class="form" id="{{ restaurant["_id"] }}" action="update">
                     <div class="form-row">
                         <div class="form-group col">
-                            <label for="{{ restaurant["_id"] }}-name" class="sr-only">Name</label>
+                            <label for="{{ restaurant["_id"] }}-name">Name</label>
                             <input type="text" class="form-control" id="{{ restaurant["_id"] }}-name" value="{{ restaurant["name"] }}">
                         </div>
                         <div class="form-group col">
-                            <label for="{{ restaurant["_id"] }}-addr" class="sr-only">Address</label>
+                            <label for="{{ restaurant["_id"] }}-addr">Address</label>
                             <input type="text" class="form-control" id="{{ restaurant["_id"] }}-addr" value="{{ restaurant["address"] }}">
                         </div>
                         <div class="form-group col">
-                            <label for="{{ restaurant["_id"] }}-url" class="sr-only">Yelp URL</label>
+                            <label for="{{ restaurant["_id"] }}-url">Yelp URL</label>
                             <input type="text" class="form-control" id="{{ restaurant["_id"] }}-url" value="{{ restaurant["yelp_url"] }}">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col">
-                            <label for="{{ restaurant["_id"] }}-rating" class="sr-only">Rating</label>
+                            <label for="{{ restaurant["_id"] }}-rating">Rating</label>
                             <input type="number" class="form-control" id="{{ restaurant["_id"] }}-rating" step="any" value="{{ restaurant["rating"] }}">
                         </div>
                         <div class="form-group col">
-                            <label for="{{ restaurant["_id"] }}-lat" class="sr-only">Latitude</label>
+                            <label for="{{ restaurant["_id"] }}-lat">Latitude</label>
                             <input type="number" class="form-control" id="{{ restaurant["_id"] }}-lat" step="any" value="{{ restaurant["location"]["coordinates"][0] }}">
                         </div>
                         <div class="form-group col">
-                            <label for="{{ restaurant["_id"] }}-long" class="sr-only">Longitude</label>
+                            <label for="{{ restaurant["_id"] }}-long">Longitude</label>
                             <input type="number" class="form-control" id="{{ restaurant["_id"] }}-long" step="any "value="{{ restaurant["location"]["coordinates"][1] }}">
                         </div>
                         <div class="form-group col">
-                            <label for="{{ restaurant["_id"] }}-categories" class="sr-only">Categories</label>
+                            <label for="{{ restaurant["_id"] }}-categories">Categories</label>
                             <input type="text" class="form-control" id="{{ restaurant["_id"] }}-categories" value="{{ ",".join(restaurant["categories"]) }}">
                         </div>
                     </div>
