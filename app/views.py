@@ -215,3 +215,12 @@ def view_restaurant(id):
         return abort(404)
 
     return render_template("restaurant.html", restaurant=restaurant)
+
+@blueprint.route("/attraction/<id>")
+@login_required
+def view_attraction(id):
+    attraction = db.session.execute("SELECT * FROM attractions WHERE id = :id", {"id": id}).first()
+    if attraction is None:
+        return abort(404)
+
+    return render_template("attraction.html", attraction=attraction)

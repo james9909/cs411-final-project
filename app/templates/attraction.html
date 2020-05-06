@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>{{ attraction[1] }}</h3>
+Address: {{ attraction[2] }}
+<br>
+Rating: {{ attraction[3] }}/5
+<br>
+<a href="{{ "https://maps.google.com/?q={},+Chicago,+IL".format(attraction[1].replace(" ", "+")) }}">Go to Maps</a>
+<br>
+<img src="{{ attraction[6] }}" height="300" width="200">
+{% endblock %}

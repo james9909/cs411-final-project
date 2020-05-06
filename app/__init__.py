@@ -6,7 +6,7 @@ from pymongo import MongoClient
 
 from app import api, views
 from app.config import Config
-from app.models import db
+from app.models import *
 
 migrate = Migrate()
 

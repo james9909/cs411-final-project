@@ -12,5 +12,6 @@ with open("data/attractions.json", "r") as f:
             "rating": attraction["rating"],
             "latitude": attraction["latitude"],
             "longitude": attraction["longitude"],
+            "image_url": attraction["image_url"]
         })
         assert r.status_code == 200

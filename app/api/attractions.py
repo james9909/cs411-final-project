@@ -11,7 +11,7 @@ blueprint = Blueprint("api_attractions", __name__)
 @api_view
 @login_required
 def get_attractions():
-    result = db.session.execute("SELECT id, name, address, rating, latitude, longitude FROM attractions").fetchall()
+    result = db.session.execute("SELECT id, name, address, rating, latitude, longitude, image_url FROM attractions").fetchall()
     data = []
     for row in result:
         currDict = {
@@ -20,7 +20,8 @@ def get_attractions():
             "address": row[2],
             "rating": row[3],
             "latitude": row[4],
-            "longitude": row[5]
+            "longitude": row[5],
+            "image_url": row[6]
         }
         data.append(currDict)
     return {
@@ -38,13 +39,15 @@ def add_attraction():
     rating = request.form["rating"]
     latitude = request.form["latitude"]
     longitude = request.form["longitude"]
+    image_url = request.form["image_url"]
 
-    db.session.execute("INSERT INTO attractions (name, address, rating, latitude, longitude) VALUES (:name, :address, :rating, :latitude, :longitude)", {
+    db.session.execute("INSERT INTO attractions (name, address, rating, latitude, longitude, image_url) VALUES (:name, :address, :rating, :latitude, :longitude, :image_url)", {
         "name": name,
         "address": address,
         "rating": rating,
         "latitude": latitude,
-        "longitude": longitude
+        "longitude": longitude,
+        "image_url": image_url
     })
     db.session.commit()
     return {"status": 200, "message": "Attraction added"}
@@ -59,19 +62,21 @@ def update_attractions(id):
     rating = request.form["rating"]
     latitude = request.form["latitude"]
     longitude = request.form["longitude"]
+    image_url = request.form["image_url"]
 
     result = db.session.execute("SELECT 1 FROM attractions WHERE id = :id", {"id": id}).fetchone()
     if result is None:
         return {"status": 404, "message": "Attraction not found"}
 
-    db.session.execute("UPDATE attractions SET name = :name, address = :address, rating = :rating, latitude = :latitude, longitude = :longitude WHERE id = :id",
+    db.session.execute("UPDATE attractions SET name = :name, address = :address, rating = :rating, latitude = :latitude, longitude = :longitude, image_url = :image_url WHERE id = :id",
     {
         "id": id,
         "name": name,
         "address": address,
         "rating": rating,
         "latitude": latitude,
-        "longitude": longitude
+        "longitude": longitude,
+        "image_url": image_url
     })
     db.session.commit()
     return {"status": 200, "message": "Attraction updated"}

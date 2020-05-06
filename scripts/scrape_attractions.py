@@ -19,6 +19,7 @@ for attraction in soup.findAll("div", {"class": "Ld2paf"}):
         rating = float(info.find("span", {"class": "KFi5wf"}).text)
         num_reviews = int(info.find("span", {"class": "jdzyld"}).text[2:-1].replace(",", ""))
         description = info.find("div", {"class": "nFoFM"}).text
+        image_url = attraction.find("img")["data-src"]
         url = "https://maps.googleapis.com/maps/api/geocode/json?address={},+Chicago,+IL&key={}".format(
             name.replace(" ", "+"),
             GOOGLE_API_KEY
@@ -36,7 +37,8 @@ for attraction in soup.findAll("div", {"class": "Ld2paf"}):
             "description": description,
             "latitude": lat,
             "longitude": lng,
-            "address": address
+            "address": address,
+            "image_url": image_url
         })
     except Exception as e:
         print("Exception: {}".format(e))

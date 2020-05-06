@@ -19,6 +19,7 @@ class Attraction(db.Model):
     rating = db.Column(db.Float, nullable=False)
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
+    image_url = db.Column(db.Text, nullable=True)
 
 class UserAttraction(db.Model):
     __tablename__ = "user_attractions"
