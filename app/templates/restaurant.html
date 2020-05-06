@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>{{ restaurant["name"] }}</h3>
+{% for category in restaurant["categories"] %}
+<span class="badge badge-primary">{{ category }}</span>
+{% endfor %}
+<br>
+Address: {{ restaurant["address"] }}
+<br>
+<a href="{{ restaurant["yelp_url"] }}">Go to Yelp</a>
+<br>
+Rating: {{ restaurant["rating"] }}/5
+{% endblock %}

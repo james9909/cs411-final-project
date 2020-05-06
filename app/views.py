@@ -206,3 +206,12 @@ def admin_airbnbs():
         }
     data = app.mongo_client["cs411"].airbnb.find(query)
     return render_template("admin/airbnb.html", airbnbs=data)
+
+@blueprint.route("/restaurant/<id>")
+@login_required
+def view_restaurant(id):
+    restaurant = app.mongo_client["cs411"].restaurants.find_one({"_id": ObjectId(id)})
+    if restaurant is None:
+        return abort(404)
+
+    return render_template("restaurant.html", restaurant=restaurant)
