@@ -22,7 +22,7 @@
 
     {% set ns = namespace(last=false) %}
     {% for airbnb_group in airbnbs | batch(3) %}
-    {% set ns.last = loop.last %}
+    {% set ns.last = loop.last and airbnb_group|length < 3 %}
     {% if not ns.last %}
     <div class="card-group">
     {% else %}
