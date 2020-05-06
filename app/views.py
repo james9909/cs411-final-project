@@ -11,6 +11,7 @@ def index():
     search_name = request.args.get("search_name", "", type=str)
     max_price = request.args.get("max_price", "", type=float)
     lowest_rating = request.args.get("lowest_rating", "", type=int)
+    amenities = request.args.get("amenities", "", type=str)
     query = {}
     if search_name != "":
         query["name"] = {
@@ -27,6 +28,11 @@ def index():
         query["rating"] = {
                 "$gte": lowest_rating
             }
+
+    if amenities != "":
+        query["amenities"] = {
+            "$all": list(map(str.strip, amenities.split(",")))
+        }
 
     data = app.mongo_client["cs411"].airbnb.find(query)
     return render_template("index.html", airbnbs=data)
