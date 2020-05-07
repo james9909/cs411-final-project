@@ -10,7 +10,7 @@ client["cs411"].airbnb.drop()
 with open("data/listings.json", "r") as f:
     data = json.loads(f.read())
 
-    for airbnb in data[:100]:
+    for airbnb in data[:300]:
         print("Importing {}".format(airbnb["name"]))
         document = {
             "name": airbnb["name"],
@@ -22,7 +22,7 @@ with open("data/listings.json", "r") as f:
             "neighborhood": airbnb["neighborhood"],
             "airbnb_url": airbnb["airbnb_url"],
             "image_url": airbnb["image_url"],
-            "price": float(airbnb["price"][1:])
+            "price": float(airbnb["price"][1:].replace(",", ""))
         }
         client["cs411"].airbnb.insert_one(document)
 client["cs411"].airbnb.create_index([("location", GEOSPHERE)])
